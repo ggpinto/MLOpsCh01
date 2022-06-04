@@ -14,3 +14,6 @@ jobs:
           make install
       - name: Set up renv
         uses: r-lib/actions/setup-renv@v2
+      - name: Lint
+        run: |
+          make lint
