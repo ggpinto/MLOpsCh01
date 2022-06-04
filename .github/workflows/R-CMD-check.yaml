@@ -12,3 +12,5 @@ jobs:
       - name: Install dependencies
         run: |
           make install
+      - name: Set up renv
+        uses: r-lib/actions/setup-renv@v2
