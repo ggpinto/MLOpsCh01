@@ -1,2 +1,3 @@
 install:
-	apt-get update -y
+	sudo apt-get update -y &&\
+		sudo apt-get install -y -r requirements.txt
