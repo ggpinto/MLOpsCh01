@@ -12,27 +12,14 @@ jobs:
       - name: Install dependencies
         run: |
           make install
-      - name: Set RENV_PATHS_ROOT
+      - name: A test
         shell: bash
         run: |
-          echo "RENV_PATHS_ROOT=${{ runner.temp }}/renv" >> $GITHUB_ENV
+          echo "options(renv.config.pak.enabled = TRUE, repos = c(RSPM = 'https://packagemanager.rstudio.com/all/__linux__/focal}/latest', CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = 4)" >> /usr/local/lib/R/etc/Rprofile.site
       - name: Install and activate renv
         shell: Rscript {0}
         run: |
           install.packages("renv")
-          renv::activate()
-      - name: Get R and OS version
-        id: get-version
-        shell: Rscript {0}
-        run: |
-          cat("##[set-output name=os-version;]", sessionInfo()$running, "\n", sep = "")
-          cat("##[set-output name=r-version;]", R.Version()$version.string, sep = "")
-      - name: Restore Renv package cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.RENV_PATHS_ROOT }}
-          key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
-          restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
       - name: Restore packages
         shell: Rscript {0}
         run: |
