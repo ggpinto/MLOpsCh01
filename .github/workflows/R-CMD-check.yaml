@@ -2,7 +2,7 @@ name: First action
 on: [push]
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set up R 4.2
@@ -31,7 +31,6 @@ jobs:
           key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
       - name: Restore packages
-        shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
+        shell: Rscript {0}
