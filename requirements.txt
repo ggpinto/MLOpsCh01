@@ -1,0 +1,6 @@
+libcurl4-openssl-dev
+libssl-dev
+git
+libicu-dev
+pandoc
+libxml2-dev
