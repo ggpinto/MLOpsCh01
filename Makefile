@@ -1,4 +1,3 @@
 install:
-	sudo apt-get update -y &&\
-		sudo apt-get install -y < requirements.txt &&\
-		R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
+	sudo apt-get update &&\
+		sudo apt-get install libcurl4-openssl-dev
