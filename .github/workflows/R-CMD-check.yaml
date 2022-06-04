@@ -34,8 +34,3 @@ jobs:
         shell: Rscript {0}
         run: |
           renv::restore()
-      - name: Install styler and lintr
-        shell: Rscript {0}
-        run: |
-          install.packages("styler")
-          install.packages("lintr")
