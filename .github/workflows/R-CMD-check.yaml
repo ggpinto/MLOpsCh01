@@ -13,6 +13,8 @@ jobs:
         run: Rscript -e 'install.packages("renv", type = "source")'
       - name: Install packages
         run: Rscript -e 'renv::restore()'
+      - name: Format files
+        run: Rscript -e 'styler::style_dir(path = c("R", "tests"))'
 
 
 
