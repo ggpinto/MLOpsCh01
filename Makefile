@@ -1,3 +1,2 @@
 install:
-	pip install --upgrade pip &&\
-		pip install -r requirements.txt
+	apt-get update -y
