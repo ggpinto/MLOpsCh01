@@ -2,7 +2,7 @@ name: First action
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: debian-stable
     steps:
       - uses: actions/checkout@v2
       - name: Setup R
