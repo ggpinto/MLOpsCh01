@@ -12,11 +12,3 @@ jobs:
       - name: Install dependencies
         run: |
           make install
-      - name: Install and activate renv
-        shell: Rscript {0}
-        run: |
-          install.packages("renv")
-      - name: Restore packages
-        shell: Rscript {0}
-        run: |
-          renv::restore()
