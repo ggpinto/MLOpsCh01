@@ -14,16 +14,16 @@ jobs:
         run: |
           echo "RENV_PATHS_ROOT=${{ runner.temp }}/renv" >> $GITHUB_ENV
       - name: Install and activate renv
+        shell: Rscript {0}
         run: |
           install.packages("renv")
           renv::activate()
-        shell: Rscript {0}
       - name: Get R and OS version
         id: get-version
+        shell: Rscript {0}
         run: |
           cat("##[set-output name=os-version;]", sessionInfo()$running, "\n", sep = "")
           cat("##[set-output name=r-version;]", R.Version()$version.string, sep = "")
-        shell: Rscript {0}
       - name: Restore Renv package cache
         uses: actions/cache@v3
         with:
@@ -31,6 +31,11 @@ jobs:
           key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
       - name: Restore packages
+        shell: Rscript {0}
         run: |
           renv::restore()
+      - name: Install styler and lintr
         shell: Rscript {0}
+        run: |
+          install.packages("styler")
+          install.packages("lintr")
